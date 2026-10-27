@@ -1,79 +1,95 @@
 @echo off
-chcp 65001 >nul
 setlocal EnableDelayedExpansion
-title QUANG ANH SKODA - TỰ ĐỘNG CÀI ĐẶT & KHỞI CHẠY VPS
+cd /d "%~dp0"
+title QUANG ANH SKODA - AUTO SETUP & DEPLOY VPS
 
 echo =====================================================================
-echo       QUANG ANH SKODA - HỆ THỐNG AUTO SETUP & DEPLOY VPS
+echo       QUANG ANH SKODA - AUTO SETUP & DEPLOY CHO VPS
 echo =====================================================================
 echo.
 
-:: 1. Kiểm tra và yêu cầu quyền Administrator
+:: 1. Kiem tra quyen Administrator (Neu chua co, tu dong mo lai voi quyen Admin va GIU NGUYEN CUA SO)
 net session >nul 2>&1
-if %errorLevel% neq 0 (
-    echo [INFO] Đang yêu cầu quyền Administrator để cấu hình tường lửa và dịch vụ...
-    powershell -Command "Start-Process cmd -ArgumentList '/c \"\"%~f0\"\"' -Verb RunAs"
+if %errorlevel% neq 0 (
+    if "%1"=="admin" (
+        echo [LOI] Khong the lay quyen Administrator. Vui long click chuot phai vao file va chon 'Run as administrator'!
+        pause
+        exit /b 1
+    )
+    echo [INFO] Dang mo lai voi quyen Administrator de cau hinh tuong lua va dich vu...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process cmd -ArgumentList '/k', 'cd /d ""%~dp0"" && ""%~f0"" admin' -Verb RunAs"
     exit /b
 )
 
-cd /d "%~dp0"
+echo [OK] Da cap quyen Administrator. Bat dau thiet lap...
+echo.
 
-:: 2. Kiểm tra môi trường Node.js
-echo [BƯỚC 1/5] Kiểm tra môi trường Node.js...
+:: 2. Kiem tra Node.js
+echo [BUOC 1/5] Kiem tra Node.js...
 where node >nul 2>&1
-if %errorLevel% neq 0 (
-    echo [!] Chưa tìm thấy Node.js trên máy. Đang tự động tải Node.js v20 LTS...
-    powershell -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object Net.WebClient).DownloadFile('https://nodejs.org/dist/v20.18.0/node-v20.18.0-x64.msi', 'nodejs_installer.msi')"
-    echo [INFO] Đang cài đặt Node.js v20 vào VPS (vui lòng chờ khoảng 1 phút)...
-    msiexec /i nodejs_installer.msi /qn /norestart
-    del nodejs_installer.msi >nul 2>&1
+if %errorlevel% neq 0 (
+    echo [!] Chua tim thay Node.js. Dang tu dong tai Node.js v20 LTS tu nodejs.org...
+    powershell -NoProfile -ExecutionPolicy Bypass -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object Net.WebClient).DownloadFile('https://nodejs.org/dist/v20.18.0/node-v20.18.0-x64.msi', 'node_setup.msi')"
+    if not exist "node_setup.msi" (
+        echo [LOI] Khong the tai bo cai Node.js. Vui long tai thu cong tu https://nodejs.org
+        pause
+        exit /b 1
+    )
+    echo [INFO] Dang cai dat Node.js v20 (vui long cho khoang 1-2 phut)...
+    msiexec /i node_setup.msi /qn /norestart
+    del /f /q node_setup.msi >nul 2>&1
     set "PATH=%ProgramFiles%\nodejs;%APPDATA%\npm;%PATH%"
-    echo [✓] Đã cài đặt Node.js thành công!
-) else (
-    for /f "tokens=*" %%v in ('node -v') do echo [✓] Node.js đã có sẵn: %%v
+    echo [OK] Da cai dat xong Node.js!
 )
 
-:: 3. Cài đặt các gói thư viện (npm install)
+call node -v
+if %errorlevel% neq 0 (
+    echo [CANH BAO] Can khoi dong lai CMD de nhan lenh node.
+    set "PATH=%ProgramFiles%\nodejs;%APPDATA%\npm;%PATH%"
+)
+call npm -v
+
+:: 3. Cai dat thu vien du an
 echo.
-echo [BƯỚC 2/5] Đang cài đặt thư viện dự án (npm install)...
-call npm install --loglevel=error
-if %errorLevel% neq 0 (
-    echo [X] Cài đặt thư viện thất bại. Vui lòng kiểm tra kết nối mạng.
+echo [BUOC 2/5] Dang cai dat thu vien du an (npm install)...
+call npm install
+if %errorlevel% neq 0 (
+    echo [LOI] npm install that bai. Vui long kiem tra ket noi mang.
     pause
-    exit /b %errorLevel%
+    exit /b %errorlevel%
 )
-echo [✓] Đã cài đặt xong tất cả các gói thư viện!
+echo [OK] Da cai dat xong thu vien!
 
-:: 4. Biên dịch dự án Next.js (npm run build)
+:: 4. Build du an Next.js
 echo.
-echo [BƯỚC 3/5] Đang biên dịch dự án Next.js (npm run build)...
+echo [BUOC 3/5] Dang bien dich du an (npm run build)...
 call npm run build
-if %errorLevel% neq 0 (
-    echo [X] Biên dịch dự án thất bại.
+if %errorlevel% neq 0 (
+    echo [LOI] Bien dich Next.js that bai!
     pause
-    exit /b %errorLevel%
+    exit /b %errorlevel%
 )
-echo [✓] Biên dịch dự án thành công!
+echo [OK] Bien dich Next.js thanh cong!
 
-:: 5. Mở cổng tường lửa Windows Firewall
+:: 5. Mo cong Windows Firewall
 echo.
-echo [BƯỚC 4/5] Đang mở cổng tường lửa Windows Firewall (Cổng 80 và 3000)...
-netsh advfirewall firewall delete rule name="NextJS_CarWeb_80" >nul 2>&1
-netsh advfirewall firewall add rule name="NextJS_CarWeb_80" dir=in action=allow protocol=TCP localport=80 >nul 2>&1
-netsh advfirewall firewall delete rule name="NextJS_CarWeb_3000" >nul 2>&1
-netsh advfirewall firewall add rule name="NextJS_CarWeb_3000" dir=in action=allow protocol=TCP localport=3000 >nul 2>&1
-echo [✓] Đã mở cổng tường lửa sẵn sàng đón khách truy cập!
+echo [BUOC 4/5] Dang cau hinh Windows Firewall mo cong 80 va 3000...
+netsh advfirewall firewall delete rule name="CarWeb_Port_80" >nul 2>&1
+netsh advfirewall firewall add rule name="CarWeb_Port_80" dir=in action=allow protocol=TCP localport=80 >nul 2>&1
+netsh advfirewall firewall delete rule name="CarWeb_Port_3000" >nul 2>&1
+netsh advfirewall firewall add rule name="CarWeb_Port_3000" dir=in action=allow protocol=TCP localport=3000 >nul 2>&1
+echo [OK] Da mo cong 80 va 3000 tren Tuong lua VPS!
 
-:: 6. Cấu hình PM2 chạy ngầm 24/7
+:: 6. Khoi chay bang PM2
 echo.
-echo [BƯỚC 5/5] Đang cấu hình website chạy ngầm 24/7 với PM2...
-call npm install -g pm2 pm2-windows-startup --silent >nul 2>&1
+echo [BUOC 5/5] Dang khoi chay website chay ngam 24/7 bang PM2...
+call npm install -g pm2 pm2-windows-startup --silent
 call pm2-startup install >nul 2>&1
 
 set "APP_PORT=80"
 netstat -ano | findstr /R /C:":80 .*LISTENING" >nul 2>&1
-if %errorLevel% equ 0 (
-    echo [!] Cổng 80 đang bận (ví dụ: IIS đang chạy). Hệ thống tự chuyển sang cổng 3000.
+if %errorlevel% equ 0 (
+    echo [THONG BAO] Cong 80 dang ban (vi du IIS dang chay). He thong tu dong chuyen sang cong 3000.
     set "APP_PORT=3000"
 )
 
@@ -81,22 +97,24 @@ call pm2 delete carweb >nul 2>&1
 call pm2 start node_modules/next/dist/bin/next --name "carweb" -- start -p !APP_PORT!
 call pm2 save >nul 2>&1
 
-:: Lấy địa chỉ IP của VPS
-for /f "tokens=*" %%a in ('powershell -Command "(Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notlike '*Loopback*' -and $_.IPAddress -notlike '169.254*' } | Select-Object -First 1).IPAddress"') do set "VPS_IP=%%a"
+echo.
+call pm2 status
+
+for /f "tokens=*" %%a in ('powershell -NoProfile -Command "(Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notlike '*Loopback*' -and $_.IPAddress -notlike '169.254*' } | Select-Object -First 1).IPAddress"') do set "VPS_IP=%%a"
 
 echo.
 echo =====================================================================
-echo                CHÚC MỪNG! WEBSITE ĐÃ CHẠY THÀNH CÔNG!
+echo             XONG! WEBSITE DA HOAT DONG 24/7 TREN VPS!
 echo =====================================================================
 echo.
-echo  - Địa chỉ xem trên VPS:       http://localhost:!APP_PORT!
-echo  - Địa chỉ truy cập từ xa:     http://!VPS_IP!:!APP_PORT!
+echo  - Xem tren VPS:           http://localhost:!APP_PORT!
+echo  - Truy cap tu ben ngoai:  http://!VPS_IP!:!APP_PORT!
 if "!APP_PORT!"=="80" (
-    echo  - Hoặc vào trực tiếp:         http://!VPS_IP!  (không cần gõ :80)
+    echo  - Hoac vao truc tiep:     http://!VPS_IP!  (khong can go :80)
 )
 echo.
-echo  * Website đã được cấu hình chạy ngầm 24/7 (tắt Remote Desktop web vẫn chạy).
-echo  * Tự động khởi động lại khi VPS reboot.
+echo  * Website da duoc cai dat chay ngam 24/7 (khong bi tat khi dong Remote Desktop).
+echo  * Tu dong bat lai khi VPS khoi dong lai.
 echo =====================================================================
 echo.
 pause
