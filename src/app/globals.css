@@ -2,25 +2,165 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #0d0e12;
+  --surface: #f8f9fb;
+  --surface-muted: #f0f2f5;
+  --border-light: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --dark-bg: #090a0d;
+  --dark-surface: #12141a;
+  --dark-border: rgba(255, 255, 255, 0.08);
+  --accent-emerald: #0e3a2f;
+  --accent-emerald-light: #165b4c;
+  --accent-burgundy: #6b1d2f;
+  --silver-metal: #94a3b8;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar - Minimal Line */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f9fb;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Luxury Minimal Buttons */
+.btn-primary-dark {
+  background-color: #0b0c10;
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+}
+.btn-primary-dark:hover {
+  background-color: #1e2229;
+  border-color: #333842;
+  transform: translateY(-1px);
+}
+
+.btn-secondary-light {
+  background-color: transparent;
+  color: #0b0c10;
+  border: 1px solid rgba(11, 12, 16, 0.25);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-secondary-light:hover {
+  background-color: #0b0c10;
+  color: #ffffff;
+  border-color: #0b0c10;
+  transform: translateY(-1px);
+}
+
+.btn-secondary-white {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.btn-secondary-white:hover {
+  background-color: #ffffff;
+  color: #0b0c10;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Luxury Editorial Image Card */
+.vehicle-card-editorial {
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vehicle-card-editorial:hover {
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.06);
+}
+
+/* Hairline dividers */
+.hairline-b {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.hairline-t {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.hairline-dark-b {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Typography Editorial */
+.font-editorial-heading {
+  letter-spacing: -0.025em;
+  font-weight: 300;
+}
+
+/* Smooth Image Zoom Container */
+.img-zoom-container img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-zoom-container:hover img {
+  transform: scale(1.04);
+}
+
+/* Automotive Carousel Progress */
+@keyframes carousel-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+.animate-carousel-progress {
+  animation: carousel-progress 6.5s linear forwards;
+}
+
+/* Hide unwanted rectangular dev indicators or overlays */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dialog-overlay],
+#nextjs-dev-tools,
+div[data-next-badge] {
+  display: none !important;
 }

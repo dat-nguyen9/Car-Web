@@ -1,69 +1,179 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useRef } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import HeroCarousel from '@/components/HeroCarousel';
+import ModelRangeStrip from '@/components/ModelRangeStrip';
+import QuickActions from '@/components/QuickActions';
+import VehicleGrid from '@/components/VehicleGrid';
+import TechExperience from '@/components/TechExperience';
+import ElectricZone from '@/components/ElectricZone';
+import NewsCard from '@/components/NewsCard';
+import DealerSearch from '@/components/DealerSearch';
+import TestDriveForm from '@/components/TestDriveForm';
+import { NEWS_DATA } from '@/data/news';
+import { gsap, useGSAP } from '@/lib/gsap';
+
+export default function HomePage() {
+  const latestNews = NEWS_DATA.slice(0, 3);
+
+  const newsSectionRef = useRef<HTMLElement>(null);
+  const newsHeaderRef = useRef<HTMLDivElement>(null);
+  const newsGridRef = useRef<HTMLDivElement>(null);
+
+  const testDriveSectionRef = useRef<HTMLElement>(null);
+  const testDriveCardRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      // News section reveal
+      if (newsHeaderRef.current) {
+        gsap.from(newsHeaderRef.current.children, {
+          scrollTrigger: {
+            trigger: newsHeaderRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+          y: 20,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 0.7,
+          ease: 'power2.out',
+          clearProps: 'all',
+        });
+      }
+
+      if (newsGridRef.current) {
+        gsap.from(newsGridRef.current.children, {
+          scrollTrigger: {
+            trigger: newsGridRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+          y: 25,
+          opacity: 0,
+          stagger: 0.08,
+          duration: 0.7,
+          ease: 'power2.out',
+          clearProps: 'all',
+        });
+      }
+
+      // Test drive card reveal
+      if (testDriveCardRef.current) {
+        gsap.from(testDriveCardRef.current, {
+          scrollTrigger: {
+            trigger: testDriveCardRef.current,
+            start: 'top 85%',
+            once: true,
+          },
+          y: 25,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          clearProps: 'all',
+        });
+      }
+    },
+    { scope: newsSectionRef }
+  );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="bg-white text-zinc-950">
+      {/* 1. Fullscreen Hero Section with GSAP Timelines & 3 Flagships */}
+      <HeroCarousel />
+
+      {/* 2. Interactive Lifestyle Model Range Selector (Direct from Škoda Vietnam) */}
+      <ModelRangeStrip />
+
+      {/* 3. Quick Actions Strip (5 Interactive Cards with ScrollTrigger Lift) */}
+      <QuickActions />
+
+      {/* 4. Product Showcase Section (Filterable Grid with Staggered Entrance) */}
+      <VehicleGrid />
+
+      {/* 4. Tech Experience (Light Split Layout with Interactive Pillars & Smooth Crossfade) */}
+      <TechExperience />
+
+      {/* 5. Flagship Performance Zone (Octavia RS with GSAP Live Metric Counters & Parallax Scrub) */}
+      <ElectricZone />
+
+      {/* 6. News & Events Section with ScrollTrigger Stagger */}
+      <section
+        ref={newsSectionRef}
+        id="news-section"
+        className="py-24 bg-white text-zinc-900 border-b border-zinc-200"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            ref={newsHeaderRef}
+            className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div>
+              <div className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#165B4C] mb-2 font-semibold">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Cập Nhật Thông Tin</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-light tracking-tight text-black">
+                Tin tức &amp; Sự kiện
+              </h2>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <Link
+                href="/news"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] font-semibold text-black hover:text-[#165B4C] transition-colors group"
+              >
+                <span>Xem Tất Cả Bài Viết</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
+
+          {/* 3 Featured News Cards */}
+          <div ref={newsGridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {latestNews.map((article) => (
+              <NewsCard key={article.id} article={article} />
+            ))}
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* 7. Dealer Locator Section with Map Preview & Filter */}
+      <DealerSearch />
+
+      {/* 8. Test Drive Booking CTA Section with Smooth Entrance */}
+      <section
+        ref={testDriveSectionRef}
+        id="test-drive-section"
+        className="py-24 bg-[#f8f9fb] border-b border-black/[0.05] relative overflow-hidden"
+      >
+        {/* Subtle Ambient Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-100 via-transparent to-transparent" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#165B4C] font-semibold">
+              Trải Nghiệm Trực Tiếp
+            </span>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight text-zinc-950">
+              Cảm nhận Quang Anh SKODA trên mọi cung đường
+            </h2>
+            <p className="text-zinc-600 text-sm font-light leading-relaxed">
+              Đặt lịch hẹn lái thử tận nhà hoặc tại showroom gần nhất. Đội ngũ chuyên gia sẽ đồng hành cùng Quý khách khám phá trọn vẹn cảm giác lái và tiện ích Simply Clever.
+            </p>
+          </div>
+
+          {/* Test Drive Form Card */}
+          <div
+            ref={testDriveCardRef}
+            className="bg-white border border-zinc-200/90 p-6 md:p-10 shadow-xl rounded-sm"
+          >
+            <TestDriveForm />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
