@@ -66,24 +66,24 @@ export default function QuickActions() {
   );
 
   return (
-    <section ref={containerRef} className="bg-white border-b border-black/5 py-8 sm:py-12 relative z-20">
+    <section ref={containerRef} className="bg-[#f2faf6] border-b border-[#0e3a2f]/10 py-8 sm:py-12 relative z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div ref={cardsRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {actions.map((act, index) => {
             const Icon = act.icon;
             const content = (
-              <div className="p-5 sm:p-6 rounded-sm border border-zinc-200/80 bg-zinc-50/50 hover:bg-white hover:border-black/30 hover:shadow-lg transition-all duration-300 group flex flex-col justify-between h-full min-h-[140px] cursor-pointer">
+              <div className="p-5 sm:p-6 rounded-sm border border-[#0e3a2f]/10 bg-white hover:border-[#78f59c] hover:shadow-[0_12px_28px_rgba(14,58,47,0.08)] transition-all duration-300 group flex flex-col justify-between h-full min-h-[140px] cursor-pointer">
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-sm bg-white border border-zinc-200 flex items-center justify-center text-zinc-700 group-hover:text-black group-hover:border-black transition-colors">
+                  <div className="w-10 h-10 rounded-sm bg-[#f2faf6] border border-[#0e3a2f]/10 flex items-center justify-center text-[#0e3a2f] group-hover:bg-[#0e3a2f] group-hover:text-[#78f59c] group-hover:border-[#0e3a2f] transition-all">
                     <Icon className="w-5 h-5 stroke-[1.5]" />
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-zinc-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <ArrowUpRight className="w-4 h-4 text-[#0e3a2f]/40 group-hover:text-[#0e3a2f] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
                 <div className="mt-4">
-                  <h3 className="text-xs sm:text-sm font-semibold tracking-wide text-zinc-900 uppercase">
+                  <h3 className="text-xs sm:text-sm font-bold tracking-wide text-[#0e3a2f] uppercase">
                     {act.title}
                   </h3>
-                  <p className="text-[11px] text-zinc-500 font-light mt-0.5">
+                  <p className="text-[11px] text-[#0e3a2f]/60 font-medium mt-0.5">
                     {act.subtitle}
                   </p>
                 </div>

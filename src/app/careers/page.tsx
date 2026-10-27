@@ -47,7 +47,7 @@ export default function CareersPage() {
       type: 'Toàn thời gian',
       salary: '25.000.000 - 80.000.000+ VNĐ (Lương cứng + Thưởng hoa hồng)',
       description:
-        'Tư vấn trực tiếp cho khách hàng thượng lưu về các dòng xe NOVA X5, NOVA S7 và NOVA E9, dẫn dắt trải nghiệm lái thử và xây dựng mối quan hệ bền vững.',
+        'Tư vấn trực tiếp cho khách hàng thượng lưu về các dòng xe Kodiaq, Karoq và Octavia RS, dẫn dắt trải nghiệm lái thử và xây dựng mối quan hệ bền vững.',
       requirements: [
         'Tối thiểu 2 năm kinh nghiệm bán hàng trong lĩnh vực ô tô hạng sang hoặc bất động sản cao cấp.',
         'Kỹ năng giao tiếp xuất sắc, phong thái thanh lịch, tự tin làm việc với khách hàng VIP.',
@@ -126,20 +126,20 @@ export default function CareersPage() {
   ];
 
   return (
-    <div className="pt-28 pb-24 bg-[#08090b] text-[#f3f4f6] min-h-screen">
+    <div className="pt-28 pb-24 bg-[#081E18] text-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: 'Cơ Hội Nghề Nghiệp' }]} />
 
         {/* Page Header */}
         <div className="mt-4 mb-16 text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-emerald-400">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-[#78F59C]">
             <Briefcase className="w-3.5 h-3.5" />
             <span>Gia Nhập Đội Ngũ Tiên Phong</span>
           </div>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-white">
             Cơ Hội Nghề Nghiệp
           </h1>
-          <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
+          <p className="text-zinc-300 text-sm sm:text-base font-light leading-relaxed">
             Chúng tôi luôn tìm kiếm những cộng sự tài năng, đam mê ô tô và khát khao định hình tiêu chuẩn phục vụ xe sang chuẩn mực tại Việt Nam.
           </p>
         </div>
@@ -151,13 +151,13 @@ export default function CareersPage() {
             return (
               <div
                 key={i}
-                className="p-6 bg-[#0f1118] border border-white/10 hover:border-white/25 transition-colors space-y-3"
+                className="p-6 bg-[#0b251f] border border-[#78F59C]/20 hover:border-[#78F59C]/40 transition-colors space-y-3 rounded-sm"
               >
-                <Icon className="w-5 h-5 text-emerald-400" />
+                <Icon className="w-5 h-5 text-[#78F59C]" />
                 <h3 className="text-sm font-semibold text-white tracking-wide uppercase">
                   {p.title}
                 </h3>
-                <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                <p className="text-zinc-300 text-xs font-light leading-relaxed">
                   {p.desc}
                 </p>
               </div>
@@ -168,7 +168,7 @@ export default function CareersPage() {
         {/* Open Job Positions List */}
         <div className="mb-20">
           <div className="mb-10 space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-emerald-400">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#78F59C]">
               Vị Trí Đang Mở Tuyển
             </span>
             <h2 className="text-2xl sm:text-4xl font-light text-white">
@@ -232,29 +232,29 @@ export default function CareersPage() {
         </div>
 
         {/* Application Form */}
-        <div id="apply-form" className="max-w-3xl mx-auto bg-[#0d0e14] border border-white/10 p-8 sm:p-12 shadow-2xl">
-          <div className="border-b border-white/10 pb-6 mb-8 space-y-2">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-emerald-400">
+        <div id="apply-form" className="max-w-3xl mx-auto bg-[#0b251f] border border-[#78F59C]/20 p-8 sm:p-12 shadow-2xl rounded-sm">
+          <div className="border-b border-[#78F59C]/20 pb-6 mb-8 space-y-2">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#78F59C]">
               Gửi Hồ Sơ
             </span>
             <h2 className="text-2xl sm:text-3xl font-light text-white">
               Nộp Hồ Sơ Ứng Tuyển Trực Tuyến
             </h2>
-            <p className="text-zinc-400 text-xs">
+            <p className="text-zinc-300 text-xs">
               Bộ phận Nhân sự sẽ phản hồi trong vòng 48 giờ làm việc kể từ khi nhận đủ thông tin.
             </p>
           </div>
 
           {submitSuccess ? (
-            <div className="p-8 bg-emerald-950/30 border border-emerald-500/40 text-center space-y-4">
-              <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+            <div className="p-8 bg-[#081E18] border border-[#78F59C]/40 text-center space-y-4 rounded-sm">
+              <CheckCircle2 className="w-12 h-12 text-[#78F59C] mx-auto" />
               <h3 className="text-xl font-medium text-white">Nộp Hồ Sơ Thành Công!</h3>
               <p className="text-xs text-zinc-300 font-light leading-relaxed">
-                Cảm ơn bạn <strong className="text-white">{candidateName}</strong> đã quan tâm tới Quang Anh SKODA. Chúng tôi sẽ xem xét CV và liên hệ hẹn phỏng vấn qua số điện thoại <strong className="text-white">{candidatePhone}</strong>.
+                Cảm ơn bạn <strong className="text-white">{candidateName}</strong> đã quan tâm tới Quang Anh SKODA. Chúng tôi sẽ xem xét CV và liên hệ hẹn phỏng vấn qua số điện thoại <strong className="text-[#78F59C]">{candidatePhone}</strong>.
               </p>
               <button
                 onClick={() => setSubmitSuccess(false)}
-                className="btn-primary-dark px-6 py-2 text-xs uppercase tracking-wider mt-4"
+                className="btn-primary-electric px-6 py-2 text-xs uppercase tracking-wider mt-4 text-[#081E18] font-bold rounded-sm"
               >
                 Gửi Hồ Sơ Khác
               </button>

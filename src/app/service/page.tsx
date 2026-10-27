@@ -26,7 +26,7 @@ export default function ServicePage() {
     ownerName: '',
     phone: '',
     licensePlate: '',
-    model: 'Škoda Kodiaq Sportline',
+    model: 'Kodiaq Sportline',
     serviceCenter: DEALERS_DATA[0].id,
     packageType: SERVICE_PACKAGES[1].name,
     bookingDate: '',
@@ -89,20 +89,20 @@ export default function ServicePage() {
   ];
 
   return (
-    <div className="pt-28 pb-24 bg-[#08090b] text-[#f3f4f6] min-h-screen">
+    <div className="pt-28 pb-24 bg-[#081E18] text-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Breadcrumb items={[{ label: 'Dịch Vụ & Bảo Dưỡng' }]} />
 
         {/* Page Header */}
         <div className="mt-4 mb-16 text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-emerald-400">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-[#78F59C]">
             <Wrench className="w-3.5 h-3.5" />
             <span>Tiêu Chuẩn Chăm Sóc Hàng Đầu Châu Âu</span>
           </div>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-white">
             Dịch Vụ &amp; Bảo Dưỡng Chính Hãng
           </h1>
-          <p className="text-zinc-400 text-sm sm:text-base font-light leading-relaxed">
+          <p className="text-zinc-300 text-sm sm:text-base font-light leading-relaxed">
             Giữ trọn độ bền bỉ, an toàn và cảm giác lái nguyên bản cho chiếc xe của Quý khách với quy trình bảo dưỡng chuẩn xác từ Quang Anh SKODA.
           </p>
         </div>
@@ -114,13 +114,13 @@ export default function ServicePage() {
             return (
               <div
                 key={i}
-                className="p-6 bg-[#0f1118] border border-white/10 hover:border-white/25 transition-colors space-y-3"
+                className="p-6 bg-[#0b251f] border border-[#78F59C]/20 hover:border-[#78F59C]/40 transition-colors space-y-3 rounded-sm"
               >
-                <Icon className="w-5 h-5 text-emerald-400" />
+                <Icon className="w-5 h-5 text-[#78F59C]" />
                 <h3 className="text-sm font-semibold text-white tracking-wide uppercase">
                   {c.title}
                 </h3>
-                <p className="text-zinc-400 text-xs font-light leading-relaxed">
+                <p className="text-zinc-300 text-xs font-light leading-relaxed">
                   {c.desc}
                 </p>
               </div>
@@ -131,13 +131,13 @@ export default function ServicePage() {
         {/* Maintenance Packages Grid */}
         <div className="mb-20">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-emerald-400">
+            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#78F59C]">
               Minh Bạch &amp; Tiết Kiệm
             </span>
             <h2 className="text-2xl sm:text-4xl font-light tracking-tight text-white">
               Các Gói Bảo Dưỡng Định Kỳ
             </h2>
-            <p className="text-zinc-400 text-xs sm:text-sm font-light">
+            <p className="text-zinc-300 text-xs sm:text-sm font-light">
               Mỗi gói dịch vụ được thiết kế tối ưu theo từng chu kỳ vận hành của xe, đảm bảo hiệu suất tốt nhất và chi phí hợp lý.
             </p>
           </div>
@@ -146,14 +146,14 @@ export default function ServicePage() {
             {SERVICE_PACKAGES.map((pkg) => (
               <div
                 key={pkg.id}
-                className={`bg-[#0f1118] border p-8 flex flex-col justify-between relative transition-all ${
+                className={`bg-[#0b251f] border p-8 flex flex-col justify-between relative transition-all rounded-sm ${
                   pkg.isPopular
-                    ? 'border-emerald-500/60 shadow-xl ring-1 ring-emerald-500/30'
-                    : 'border-white/10 hover:border-white/20'
+                    ? 'border-[#78F59C] shadow-xl ring-1 ring-[#78F59C]/40'
+                    : 'border-[#78F59C]/20 hover:border-[#78F59C]/40'
                 }`}
               >
                 {pkg.isPopular && (
-                  <div className="absolute -top-3 left-8 px-3 py-0.5 bg-emerald-500 text-black text-[10px] uppercase font-mono font-bold tracking-widest">
+                  <div className="absolute -top-3 left-8 px-3 py-0.5 bg-[#78F59C] text-[#081E18] text-[10px] uppercase font-mono font-bold tracking-widest rounded-xs">
                     Khuyên Dùng Cho Xe Mới
                   </div>
                 )}
@@ -169,22 +169,22 @@ export default function ServicePage() {
                   </div>
 
                   <div className="pt-4 border-t border-white/5">
-                    <span className="text-[10px] uppercase font-mono tracking-wider text-zinc-500 block">
+                    <span className="text-[10px] uppercase font-mono tracking-wider text-zinc-400 block">
                       Chi phí dự toán
                     </span>
-                    <span className="text-2xl font-mono font-semibold text-emerald-400">
+                    <span className="text-2xl font-mono font-semibold text-[#78F59C]">
                       {pkg.priceEstimate}
                     </span>
                   </div>
 
                   <div className="space-y-2.5 pt-2">
-                    <span className="text-xs uppercase font-mono tracking-wider text-zinc-400 block">
+                    <span className="text-xs uppercase font-mono tracking-wider text-zinc-300 block">
                       Hạng mục kiểm tra &amp; thay thế:
                     </span>
                     <ul className="space-y-2 text-xs text-zinc-300">
                       {pkg.items.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#78F59C] shrink-0 mt-0.5" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -196,8 +196,10 @@ export default function ServicePage() {
                   <a
                     href="#booking-section"
                     onClick={() => setFormState((prev) => ({ ...prev, packageType: pkg.name }))}
-                    className={`w-full py-2.5 text-center text-xs uppercase tracking-wider font-semibold block transition-colors ${
-                      pkg.isPopular ? 'btn-primary-dark' : 'btn-secondary-light text-white'
+                    className={`w-full py-2.5 text-center text-xs uppercase tracking-wider font-semibold block transition-colors rounded-sm ${
+                      pkg.isPopular
+                        ? 'btn-primary-electric text-[#081E18]'
+                        : 'border border-[#78F59C]/40 text-white hover:bg-[#78F59C]/10'
                     }`}
                   >
                     Chọn Gói Này &amp; Đặt Lịch
@@ -209,7 +211,7 @@ export default function ServicePage() {
         </div>
 
         {/* Appointment Booking Section */}
-        <div id="booking-section" className="mb-20 bg-[#0d0e14] border border-white/10 p-6 sm:p-12 shadow-2xl">
+        <div id="booking-section" className="mb-20 bg-[#0b251f] border border-[#78F59C]/20 p-6 sm:p-12 shadow-2xl rounded-sm">
           <div className="max-w-3xl mb-8 space-y-2">
             <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-emerald-400">
               Đặt Hẹn Nhanh

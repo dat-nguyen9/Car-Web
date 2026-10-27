@@ -44,7 +44,7 @@ async function VehicleDetailContent({ paramsPromise }: { paramsPromise: Promise<
 
 export default function VehiclePage({ params }: PageProps) {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#08090b] pt-32 text-center text-zinc-500">Đang tải thông tin xe...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#081E18] pt-32 text-center text-[#78F59C] font-mono text-xs">Đang tải thông tin xe...</div>}>
       <VehicleDetailContent paramsPromise={params} />
     </Suspense>
   );

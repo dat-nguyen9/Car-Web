@@ -9,7 +9,7 @@ interface Hero3DCanvasProps {
 
 export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
   const mountRef = useRef<HTMLDivElement>(null);
-  const targetColorRef = useRef<THREE.Color>(new THREE.Color(0x10b981)); // Kodiaq Emerald
+  const targetColorRef = useRef<THREE.Color>(new THREE.Color(0x78f59c)); // Škoda Electric Green
   const mouseRef = useRef<{ x: number; y: number; targetX: number; targetY: number }>({
     x: 0,
     y: 0,
@@ -17,11 +17,11 @@ export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
     targetY: 0,
   });
 
-  // Dark luxury automotive studio accent colors (matching Image 2)
-  const themeColors = [0x10b981, 0x38bdf8, 0xef4444];
+  // Official Škoda Green & White palette
+  const themeColors = [0x78f59c, 0x0e3a2f, 0x5ce884];
 
   useEffect(() => {
-    targetColorRef.current.setHex(themeColors[currentIndex] || 0x10b981);
+    targetColorRef.current.setHex(themeColors[currentIndex] || 0x78f59c);
   }, [currentIndex]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
 
     // 1. Scene, Camera, Renderer Setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x07080b, 0.035);
+    scene.fog = new THREE.FogExp2(0x081e18, 0.035);
 
     const camera = new THREE.PerspectiveCamera(
       52,
@@ -54,7 +54,7 @@ export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
     // 2. Architectural 3D Polished Metallic Ring behind the Car
     const ringGeometry = new THREE.TorusGeometry(3.0, 0.025, 16, 120);
     const ringMaterial = new THREE.MeshBasicMaterial({
-      color: 0x10b981,
+      color: 0x78f59c,
       transparent: true,
       opacity: 0.55,
     });
@@ -67,9 +67,9 @@ export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
     // Secondary Outer Ring
     const outerRingGeometry = new THREE.TorusGeometry(3.9, 0.012, 16, 100);
     const outerRingMaterial = new THREE.MeshBasicMaterial({
-      color: 0x64748b,
+      color: 0x165b4c,
       transparent: true,
-      opacity: 0.25,
+      opacity: 0.35,
     });
     const outerRingMesh = new THREE.Mesh(outerRingGeometry, outerRingMaterial);
     outerRingMesh.position.set(2.4, 0.6, -2.2);
@@ -92,10 +92,10 @@ export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
     particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     const particleMaterial = new THREE.PointsMaterial({
       map: particleTexture,
-      color: 0x94a3b8,
+      color: 0x78f59c,
       size: 0.12,
       transparent: true,
-      opacity: 0.4,
+      opacity: 0.45,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
@@ -106,7 +106,7 @@ export default function Hero3DCanvas({ currentIndex }: Hero3DCanvasProps) {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0x10b981, 3.2, 14);
+    const pointLight = new THREE.PointLight(0x78f59c, 3.5, 14);
     pointLight.position.set(2.5, 1.5, 0);
     scene.add(pointLight);
 

@@ -112,12 +112,12 @@ export default function ModelRangeStrip() {
     <section
       ref={containerRef}
       id="range-strip"
-      className="py-14 sm:py-20 bg-[#f3f4f6] border-b border-black/[0.06] relative overflow-hidden"
+      className="py-14 sm:py-20 bg-white border-b border-[#0e3a2f]/10 relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Lifestyle Filter Tabs Bar (Exact Škoda Vietnam Design) */}
         <div className="flex justify-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center border-b border-zinc-300 overflow-x-auto no-scrollbar">
+          <div className="inline-flex items-center border-b border-[#0e3a2f]/15 overflow-x-auto no-scrollbar">
             {filters.map((f) => {
               const isActive = activeFilter === f.value;
               return (
@@ -126,15 +126,15 @@ export default function ModelRangeStrip() {
                   onClick={() => setActiveFilter(f.value)}
                   className={`relative px-5 sm:px-8 py-3 text-xs sm:text-sm tracking-wide transition-all cursor-pointer whitespace-nowrap ${
                     isActive
-                      ? 'bg-[#e5e9ec] text-[#165B4C] font-semibold'
-                      : 'text-zinc-600 hover:text-black font-normal hover:bg-black/[0.02]'
+                      ? 'bg-[#f2faf6] text-[#0e3a2f] font-bold'
+                      : 'text-[#0e3a2f]/60 hover:text-[#0e3a2f] font-normal hover:bg-[#f2faf6]/50'
                   }`}
                 >
                   <span>{f.label}</span>
 
                   {/* Active Green Hairline Underline */}
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#165B4C]" />
+                    <span className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#0e3a2f]" />
                   )}
                 </button>
               );
@@ -171,11 +171,11 @@ export default function ModelRangeStrip() {
                       : 'opacity-0 translate-y-2 scale-95'
                   }`}
                 >
-                  <div className="bg-[#0f1118] text-white text-[11px] font-mono py-1.5 px-3 rounded-sm shadow-xl border border-white/15 whitespace-nowrap flex items-center gap-2">
-                    <span className="text-emerald-400 font-semibold">{car.power}</span>
-                    <span className="text-zinc-500">&bull;</span>
-                    <span className="text-zinc-300">{car.seat}</span>
-                    <span className="text-zinc-500">&bull;</span>
+                  <div className="bg-[#081e18] text-white text-[11px] font-mono py-1.5 px-3 rounded-sm shadow-xl border border-[#78f59c]/30 whitespace-nowrap flex items-center gap-2">
+                    <span className="text-[#78f59c] font-bold">{car.power}</span>
+                    <span className="text-emerald-300/40">&bull;</span>
+                    <span className="text-zinc-200">{car.seat}</span>
+                    <span className="text-emerald-300/40">&bull;</span>
                     <span className="text-white font-bold">{car.price}</span>
                   </div>
                 </div>
@@ -183,7 +183,7 @@ export default function ModelRangeStrip() {
                 {/* Optional "MỚI" Badge */}
                 <div className="w-full flex justify-start mb-1 h-5">
                   {car.badge && (
-                    <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-zinc-900 bg-white/80 px-1.5 py-0.5 rounded border border-zinc-200">
+                    <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#081e18] bg-[#78f59c] px-2 py-0.5 rounded shadow-xs">
                       {car.badge}
                     </span>
                   )}
@@ -215,10 +215,10 @@ export default function ModelRangeStrip() {
                   href={`/models/${car.slug}`}
                   className="mt-3 group flex items-center gap-1.5 text-center cursor-pointer"
                 >
-                  <span className="text-sm sm:text-base font-bold tracking-tight text-zinc-950 group-hover:text-[#165B4C] transition-colors">
+                  <span className="text-sm sm:text-base font-bold tracking-tight text-[#0e3a2f] group-hover:text-[#165b4c] transition-colors">
                     {car.name}
                   </span>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#165B4C]" />
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-[#0e3a2f]" />
                 </Link>
               </div>
             );
@@ -229,7 +229,7 @@ export default function ModelRangeStrip() {
         <div className="flex justify-center">
           <Link
             href="/models"
-            className="inline-flex items-center gap-2.5 px-8 sm:px-10 py-3 rounded-full border-2 border-black text-xs sm:text-sm font-semibold uppercase tracking-wider text-black hover:bg-black hover:text-white transition-all duration-300 shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-2.5 px-8 sm:px-10 py-3 rounded-full border-2 border-[#0e3a2f] text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0e3a2f] hover:bg-[#0e3a2f] hover:text-[#78f59c] transition-all duration-300 shadow-xs cursor-pointer"
           >
             <span>Xem tất cả xe</span>
             <ArrowRight className="w-4 h-4" />

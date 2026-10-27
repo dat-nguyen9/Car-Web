@@ -97,21 +97,21 @@ export default function TechExperience() {
     <section
       ref={containerRef}
       id="technology"
-      className="py-24 sm:py-32 bg-[#f8f9fb] text-zinc-950 border-b border-black/[0.06] relative overflow-hidden"
+      className="py-24 sm:py-32 bg-[#F2FAF6] text-[#0E3A2F] border-b border-[#0E3A2F]/10 relative overflow-hidden"
     >
       {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#78F59C]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div ref={headerRef} className="max-w-3xl mb-16 space-y-4">
-          <span className="text-xs uppercase tracking-[0.25em] text-[#165B4C] font-mono font-semibold">
+          <span className="text-xs uppercase tracking-[0.25em] text-[#0E3A2F] font-mono font-semibold">
             Kỹ Nghệ &amp; Đổi Mới
           </span>
-          <h2 className="text-3xl sm:text-5xl font-light text-zinc-950 tracking-tight leading-tight">
-            Công nghệ tạo nên <span className="font-normal text-zinc-800">sự khác biệt</span>
+          <h2 className="text-3xl sm:text-5xl font-light text-[#0E3A2F] tracking-tight leading-tight">
+            Công nghệ tạo nên <span className="font-semibold text-[#0E3A2F]">sự khác biệt</span>
           </h2>
-          <p className="text-sm sm:text-base text-zinc-600 font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-[#0E3A2F]/75 font-light leading-relaxed">
             Mỗi chi tiết trên xe đều được tạo nên từ triết lý Simply Clever trứ danh kết hợp cùng những thành tựu công nghệ hỗ trợ lái và an toàn chủ động hàng đầu thế giới.
           </p>
         </div>
@@ -120,14 +120,14 @@ export default function TechExperience() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Visual Showcase (7 cols on lg) */}
           <div ref={mediaRef} className="lg:col-span-7">
-            <div className="relative aspect-[16/10] rounded-sm overflow-hidden border border-zinc-200/90 shadow-xl bg-zinc-100">
+            <div className="relative aspect-[16/10] rounded-sm overflow-hidden border border-[#0E3A2F]/15 shadow-xl bg-white">
               <img
                 ref={activeImageRef}
                 src={images[activeTab]}
                 alt={TECH_PILLARS[activeTab].title}
                 className="w-full h-full object-cover will-change-transform"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081E18]/85 via-transparent to-transparent" />
 
               {/* Highlight badge on image */}
               <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white">
@@ -140,7 +140,7 @@ export default function TechExperience() {
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs text-emerald-400 font-mono">
+                  <span className="text-xs text-[#78F59C] font-mono font-semibold">
                     {TECH_PILLARS[activeTab].subtext}
                   </span>
                 </div>
@@ -160,26 +160,26 @@ export default function TechExperience() {
                   onClick={() => setActiveTab(idx)}
                   className={`p-5 rounded-sm border transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'bg-white border-black/40 shadow-md ring-1 ring-black/5'
-                      : 'bg-white/60 border-zinc-200/70 hover:bg-white hover:border-zinc-300'
+                      ? 'bg-white border-[#0E3A2F] shadow-md ring-1 ring-[#0E3A2F]/15'
+                      : 'bg-white/70 border-[#0E3A2F]/10 hover:bg-white hover:border-[#0E3A2F]/30'
                   }`}
                 >
                   <div className="flex items-start gap-4">
                     <div
                       className={`w-9 h-9 rounded-sm flex items-center justify-center shrink-0 transition-colors ${
-                        isActive ? 'bg-zinc-950 text-white' : 'bg-zinc-100 text-zinc-600'
+                        isActive ? 'bg-[#0E3A2F] text-[#78F59C]' : 'bg-[#F2FAF6] text-[#0E3A2F]'
                       }`}
                     >
                       <Icon className="w-4 h-4 stroke-[2]" />
                     </div>
                     <div className="space-y-1 flex-1">
                       <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-semibold tracking-wide text-zinc-950">
+                        <h3 className="text-sm font-semibold tracking-wide text-[#0E3A2F]">
                           {tech.title}
                         </h3>
-                        <span className="text-[10px] font-mono text-zinc-400">0{idx + 1}</span>
+                        <span className="text-[10px] font-mono text-[#0E3A2F]/50">0{idx + 1}</span>
                       </div>
-                      <p className="text-xs text-zinc-500 font-light leading-relaxed">
+                      <p className="text-xs text-[#0E3A2F]/70 font-light leading-relaxed">
                         {tech.description}
                       </p>
                     </div>
@@ -191,7 +191,7 @@ export default function TechExperience() {
             <div className="pt-4">
               <Link
                 href="/about"
-                className="btn-primary-dark w-full text-center py-3.5 text-xs font-semibold uppercase tracking-wider block bg-zinc-950 text-white hover:bg-zinc-800 rounded-sm shadow-xs transition-colors"
+                className="w-full text-center py-3.5 text-xs font-semibold uppercase tracking-wider block bg-[#0E3A2F] text-white hover:bg-[#081E18] hover:text-[#78F59C] rounded-sm shadow-sm transition-colors"
               >
                 Tìm Hiểu Thêm Về Triết Lý Thương Hiệu
               </Link>

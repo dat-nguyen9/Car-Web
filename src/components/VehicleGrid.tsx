@@ -92,7 +92,7 @@ export default function VehicleGrid() {
     <section
       ref={containerRef}
       id="models-section"
-      className="py-20 sm:py-28 bg-[#fafbfc] border-b border-black/5"
+      className="py-20 sm:py-28 bg-[#fbfdfc] border-b border-[#0e3a2f]/10"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -101,21 +101,21 @@ export default function VehicleGrid() {
           className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
         >
           <div className="space-y-3 max-w-2xl">
-            <span className="text-xs uppercase tracking-[0.25em] text-zinc-400 font-mono font-medium">
+            <span className="text-xs uppercase tracking-[0.25em] text-[#0e3a2f] font-mono font-bold">
               Bộ Sưu Tập Xe Mới Nhất
             </span>
-            <h2 className="text-3xl sm:text-5xl font-light text-zinc-950 tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-light text-[#0e3a2f] tracking-tight leading-tight">
               Khám phá những mẫu xe <br />
-              <span className="font-normal text-zinc-900">mới nhất của chúng tôi</span>
+              <span className="font-semibold text-[#0e3a2f]">chuẩn phong cách Châu Âu</span>
             </h2>
-            <p className="text-sm text-zinc-600 font-light leading-relaxed">
+            <p className="text-sm text-[#0e3a2f]/70 font-light leading-relaxed">
               Trải nghiệm độ hoàn thiện tinh xảo, không gian tiện nghi vượt trội và cảm giác lái đầm chắc đậm chất cơ khí Châu Âu.
             </p>
           </div>
 
           <Link
             href="/models"
-            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] font-medium text-zinc-900 hover:text-[#165B4C] transition-colors pb-1 border-b border-black"
+            className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.15em] font-bold text-[#0e3a2f] hover:text-[#165b4c] transition-colors pb-1 border-b-2 border-[#0e3a2f]"
           >
             <span>Xem Toàn Bộ Bảng Giá &amp; Mẫu Xe</span>
             <ArrowRight className="w-4 h-4" />
@@ -123,15 +123,15 @@ export default function VehicleGrid() {
         </div>
 
         {/* Filter Tabs Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar border-b border-zinc-200">
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 no-scrollbar border-b border-[#0e3a2f]/10">
           {categories.map((cat) => (
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
-              className={`px-4 py-2.5 text-xs uppercase tracking-wider font-medium rounded-sm whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-4 py-2.5 text-xs uppercase tracking-wider font-semibold rounded-sm whitespace-nowrap transition-all cursor-pointer ${
                 activeCategory === cat.value
-                  ? 'bg-zinc-950 text-white shadow-xs'
-                  : 'text-zinc-600 hover:text-black hover:bg-zinc-100'
+                  ? 'bg-[#0e3a2f] text-[#78f59c] shadow-sm'
+                  : 'text-[#0e3a2f]/70 hover:text-[#0e3a2f] hover:bg-[#f2faf6]'
               }`}
             >
               {cat.label}

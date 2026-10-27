@@ -90,39 +90,39 @@ export default function ModelsPage() {
     searchQuery.trim() !== '';
 
   return (
-    <div className="pt-28 pb-24 bg-[#08090b] text-[#f3f4f6] min-h-screen">
+    <div className="pt-28 pb-24 bg-[#F2FAF6] text-[#0E3A2F] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <Breadcrumb items={[{ label: 'Dòng Xe Quang Anh SKODA' }]} />
+        <Breadcrumb items={[{ label: 'Dòng Xe Quang Anh SKODA' }]} theme="light" />
 
         {/* Page Header */}
         <div className="mt-4 mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-emerald-400">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.25em] text-[#0E3A2F] font-semibold">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Bộ Sưu Tập Xe Châu Âu Hoàn Mỹ</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-white">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-light tracking-tight text-[#0E3A2F]">
             Danh Mục Các Dòng Xe
           </h1>
-          <p className="text-zinc-400 text-sm sm:text-base max-w-3xl font-light leading-relaxed">
+          <p className="text-[#0E3A2F]/75 text-sm sm:text-base max-w-3xl font-light leading-relaxed">
             Khám phá trọn vẹn dải sản phẩm ô tô cao cấp với độ hoàn thiện tinh tế, trang bị tiện nghi đỉnh cao và cảm giác lái chuẩn mực châu Âu từ Quang Anh SKODA.
           </p>
         </div>
 
         {/* Filter Toolbar */}
-        <div className="bg-[#0f1118] border border-white/10 p-5 mb-10 space-y-5">
+        <div className="bg-white border border-[#0E3A2F]/15 p-5 mb-10 space-y-5 shadow-sm rounded-sm">
           {/* Top row: Category tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-white/5">
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-[#0E3A2F]/10">
             {categories.map((cat) => {
               const active = selectedCategory === cat.value;
               return (
                 <button
                   key={cat.value}
                   onClick={() => setSelectedCategory(cat.value)}
-                  className={`px-4 py-2 text-xs uppercase tracking-wider font-medium whitespace-nowrap transition-colors ${
+                  className={`px-4 py-2 text-xs uppercase tracking-wider font-semibold whitespace-nowrap transition-colors rounded-sm ${
                     active
-                      ? 'bg-white text-black font-semibold'
-                      : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                      ? 'bg-[#0E3A2F] text-[#78F59C]'
+                      : 'text-[#0E3A2F]/70 hover:text-[#0E3A2F] hover:bg-[#F2FAF6]'
                   }`}
                 >
                   {cat.label}
@@ -135,13 +135,13 @@ export default function ModelsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+              <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#0E3A2F]/50" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Tìm theo tên xe, phiên bản..."
-                className="w-full bg-black/40 border border-white/10 pl-10 pr-4 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/40 transition-colors"
+                className="w-full bg-[#F2FAF6] border border-[#0E3A2F]/20 pl-10 pr-4 py-2.5 text-xs text-[#0E3A2F] placeholder-[#0E3A2F]/40 focus:outline-none focus:border-[#0E3A2F] rounded-sm transition-colors"
               />
             </div>
 
@@ -150,10 +150,10 @@ export default function ModelsPage() {
               <select
                 value={selectedFuel}
                 onChange={(e) => setSelectedFuel(e.target.value)}
-                className="w-full bg-black/40 border border-white/10 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors"
+                className="w-full bg-[#F2FAF6] border border-[#0E3A2F]/20 px-3.5 py-2.5 text-xs text-[#0E3A2F] focus:outline-none focus:border-[#0E3A2F] rounded-sm transition-colors"
               >
                 {fuelTypes.map((fuel) => (
-                  <option key={fuel.value} value={fuel.value} className="bg-zinc-900 text-white">
+                  <option key={fuel.value} value={fuel.value} className="bg-white text-[#0E3A2F]">
                     {fuel.label}
                   </option>
                 ))}
@@ -165,10 +165,10 @@ export default function ModelsPage() {
               <select
                 value={selectedPriceRange}
                 onChange={(e) => setSelectedPriceRange(e.target.value)}
-                className="w-full bg-black/40 border border-white/10 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors"
+                className="w-full bg-[#F2FAF6] border border-[#0E3A2F]/20 px-3.5 py-2.5 text-xs text-[#0E3A2F] focus:outline-none focus:border-[#0E3A2F] rounded-sm transition-colors"
               >
                 {priceRanges.map((range) => (
-                  <option key={range.value} value={range.value} className="bg-zinc-900 text-white">
+                  <option key={range.value} value={range.value} className="bg-white text-[#0E3A2F]">
                     {range.label}
                   </option>
                 ))}
@@ -180,15 +180,15 @@ export default function ModelsPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full bg-black/40 border border-white/10 px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/40 transition-colors"
+                className="w-full bg-[#F2FAF6] border border-[#0E3A2F]/20 px-3.5 py-2.5 text-xs text-[#0E3A2F] focus:outline-none focus:border-[#0E3A2F] rounded-sm transition-colors"
               >
-                <option value="featured" className="bg-zinc-900 text-white">
+                <option value="featured" className="bg-white text-[#0E3A2F]">
                   Sắp xếp: Tiêu biểu nhất
                 </option>
-                <option value="price-asc" className="bg-zinc-900 text-white">
+                <option value="price-asc" className="bg-white text-[#0E3A2F]">
                   Giá: Tăng dần
                 </option>
-                <option value="price-desc" className="bg-zinc-900 text-white">
+                <option value="price-desc" className="bg-white text-[#0E3A2F]">
                   Giá: Giảm dần
                 </option>
               </select>
@@ -196,14 +196,14 @@ export default function ModelsPage() {
           </div>
 
           {/* Active filter summary & reset */}
-          <div className="flex items-center justify-between text-xs pt-1 border-t border-white/5 text-zinc-400">
+          <div className="flex items-center justify-between text-xs pt-1 border-t border-[#0E3A2F]/10 text-[#0E3A2F]/70">
             <span>
-              Tìm thấy <strong className="text-white font-medium">{filteredVehicles.length}</strong> mẫu xe phù hợp
+              Tìm thấy <strong className="text-[#0E3A2F] font-semibold">{filteredVehicles.length}</strong> mẫu xe phù hợp
             </span>
             {hasActiveFilters && (
               <button
                 onClick={handleResetFilters}
-                className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors uppercase text-[11px] tracking-wider"
+                className="inline-flex items-center gap-1.5 text-[#0E3A2F] hover:text-[#0E3A2F]/70 transition-colors uppercase text-[11px] font-semibold tracking-wider"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Đặt lại bộ lọc</span>
@@ -220,19 +220,19 @@ export default function ModelsPage() {
             ))}
           </div>
         ) : (
-          <div className="bg-[#0f1118] border border-white/10 p-16 text-center max-w-xl mx-auto space-y-5">
-            <div className="w-14 h-14 mx-auto rounded-full bg-white/5 flex items-center justify-center text-zinc-500">
+          <div className="bg-white border border-[#0E3A2F]/15 p-16 text-center max-w-xl mx-auto space-y-5 rounded-sm shadow-sm">
+            <div className="w-14 h-14 mx-auto rounded-full bg-[#F2FAF6] flex items-center justify-center text-[#0E3A2F]">
               <Filter className="w-6 h-6" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-xl font-normal text-white">Không tìm thấy mẫu xe phù hợp</h3>
-              <p className="text-zinc-400 text-xs leading-relaxed">
+              <h3 className="text-xl font-normal text-[#0E3A2F]">Không tìm thấy mẫu xe phù hợp</h3>
+              <p className="text-[#0E3A2F]/70 text-xs leading-relaxed">
                 Rất tiếc không có dòng xe nào khớp với tiêu chí tìm kiếm hiện tại của Quý khách. Vui lòng thử thay đổi khoảng giá hoặc loại nhiên liệu.
               </p>
             </div>
             <button
               onClick={handleResetFilters}
-              className="btn-primary-dark px-6 py-2.5 text-xs uppercase tracking-wider inline-flex items-center gap-2"
+              className="btn-primary-dark px-6 py-2.5 text-xs uppercase tracking-wider inline-flex items-center gap-2 rounded-sm bg-[#0E3A2F] text-white hover:bg-[#081E18] hover:text-[#78F59C]"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Xem tất cả xe</span>

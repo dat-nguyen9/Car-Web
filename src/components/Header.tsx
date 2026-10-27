@@ -60,8 +60,8 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isTransparent
-            ? 'bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5 text-white'
-            : 'bg-[#0a0c10]/95 backdrop-blur-md py-3.5 text-white border-b border-white/10 shadow-lg'
+            ? 'bg-gradient-to-b from-[#081e18]/90 via-[#081e18]/40 to-transparent py-5 text-white'
+            : 'bg-[#0e3a2f]/95 backdrop-blur-md py-3.5 text-white border-b border-[#78f59c]/20 shadow-lg'
         }`}
       >
         <div className="max-w-[1520px] mx-auto px-5 sm:px-8 lg:px-12">
@@ -71,12 +71,12 @@ export default function Header() {
               <div
                 className={`relative w-9 h-9 sm:w-10 sm:h-10 rounded-sm border flex items-center justify-center transition-all duration-300 ${
                   isTransparent
-                    ? 'border-white/40 text-white group-hover:border-white group-hover:bg-white group-hover:text-black'
-                    : 'border-white/30 text-white group-hover:border-white group-hover:bg-white group-hover:text-black'
+                    ? 'border-white/40 text-white group-hover:border-[#78f59c] group-hover:bg-[#78f59c] group-hover:text-[#081e18]'
+                    : 'border-[#78f59c]/40 text-white group-hover:border-[#78f59c] group-hover:bg-[#78f59c] group-hover:text-[#081e18]'
                 }`}
               >
                 <span className="font-bold text-xs sm:text-sm tracking-widest font-mono">QA</span>
-                <span className="absolute -bottom-1 -right-1 w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span className="absolute -bottom-1 -right-1 w-1.5 h-1.5 rounded-full bg-[#78f59c] shadow-[0_0_8px_#78f59c]" />
               </div>
 
               <div className="flex flex-col">
@@ -84,11 +84,11 @@ export default function Header() {
                   <span className="font-semibold text-xs sm:text-sm tracking-[0.22em] uppercase whitespace-nowrap text-white">
                     QUANG ANH
                   </span>
-                  <span className="text-[10px] sm:text-xs font-light tracking-[0.28em] uppercase text-zinc-300">
+                  <span className="text-[10px] sm:text-xs font-bold tracking-[0.28em] uppercase text-[#78f59c]">
                     SKODA
                   </span>
                 </div>
-                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.26em] text-zinc-400 whitespace-nowrap">
+                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.26em] text-emerald-100/70 whitespace-nowrap">
                   European Luxury Automotive
                 </span>
               </div>
@@ -104,8 +104,8 @@ export default function Header() {
                     href={link.href}
                     className={`relative py-1.5 transition-colors group ${
                       isActive
-                        ? 'text-white font-semibold'
-                        : 'text-zinc-300 hover:text-white'
+                        ? 'text-[#78f59c] font-semibold'
+                        : 'text-zinc-200 hover:text-white'
                     }`}
                   >
                     <span>{link.label}</span>
@@ -113,8 +113,8 @@ export default function Header() {
                     <span
                       className={`absolute bottom-0 left-0 right-0 h-[1.5px] transition-all duration-300 ${
                         isActive
-                          ? 'bg-white opacity-100'
-                          : 'bg-emerald-400 opacity-0 group-hover:opacity-100 group-hover:scale-x-100 scale-x-0 origin-left'
+                          ? 'bg-[#78f59c] opacity-100 shadow-[0_0_8px_#78f59c]'
+                          : 'bg-[#78f59c] opacity-0 group-hover:opacity-100 group-hover:scale-x-100 scale-x-0 origin-left'
                       }`}
                     />
                   </Link>
@@ -137,16 +137,16 @@ export default function Header() {
               {/* Direct Hotline Pill (Restrained Luxury Aesthetic) */}
               <a
                 href="tel:0988333666"
-                className="hidden xl:inline-flex items-center gap-2 text-[11px] font-mono tracking-wider px-3.5 py-1.5 rounded-full border border-white/20 text-zinc-200 hover:text-white hover:border-white/50 bg-black/30 transition-all whitespace-nowrap"
+                className="hidden xl:inline-flex items-center gap-2 text-[11px] font-mono tracking-wider px-3.5 py-1.5 rounded-full border border-[#78f59c]/30 text-zinc-100 hover:text-white hover:border-[#78f59c] bg-[#081e18]/60 transition-all whitespace-nowrap"
               >
-                <Phone className="w-3.5 h-3.5 text-emerald-400" />
+                <Phone className="w-3.5 h-3.5 text-[#78f59c]" />
                 <span className="font-medium">0988.333.666</span>
               </a>
 
-              {/* Primary Test Drive CTA Button */}
+              {/* Primary Test Drive CTA Button - Electric Green & Dark Contrast */}
               <Link
                 href="/test-drive"
-                className="px-5 sm:px-6 py-2.5 rounded-sm text-[11px] uppercase tracking-[0.14em] font-semibold whitespace-nowrap transition-all duration-300 bg-white text-black hover:bg-zinc-200 hover:shadow-lg"
+                className="px-5 sm:px-6 py-2.5 rounded-sm text-[11px] uppercase tracking-[0.14em] font-bold whitespace-nowrap transition-all duration-300 bg-[#78f59c] text-[#081e18] hover:bg-white hover:text-[#0e3a2f] shadow-[0_0_20px_rgba(120,245,156,0.3)] hover:shadow-lg"
               >
                 Đăng ký lái thử
               </Link>

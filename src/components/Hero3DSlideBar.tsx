@@ -28,11 +28,11 @@ export default function Hero3DSlideBar({
   const targetXRef = useRef(0);
   const currentPuckXRef = useRef(0);
 
-  // Vibrant automotive neon colors for dark 3D laser dot
+  // Electric green automotive dot colors
   const dotColors = [
-    new THREE.Color(0x10b981), // Kodiaq Emerald
-    new THREE.Color(0x38bdf8), // Karoq Glacier Cyan
-    new THREE.Color(0xef4444), // Octavia RS Racing Crimson
+    new THREE.Color(0x78f59c), // Škoda Electric Green
+    new THREE.Color(0x78f59c), // Škoda Electric Green
+    new THREE.Color(0x78f59c), // Škoda Electric Green
   ];
 
   // 3D Laser Track Micro-Scene on Dark Rail
@@ -152,7 +152,7 @@ export default function Hero3DSlideBar({
   return (
     <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:pb-8">
       {/* Dark Floating Luxury Glassmorphic Slide Bar Dock */}
-      <div className="bg-[#0b0c10]/92 backdrop-blur-md border border-white/15 rounded-sm p-3.5 sm:px-6 sm:py-4 shadow-[0_15px_35px_-5px_rgba(0,0,0,0.5)] text-white">
+      <div className="bg-[#081e18]/92 backdrop-blur-md border border-[#78f59c]/20 rounded-sm p-3.5 sm:px-6 sm:py-4 shadow-[0_15px_35px_-5px_rgba(0,0,0,0.6)] text-white">
         {/* 3D Laser Rail Track */}
         <div className="relative mb-2.5">
           <div ref={canvasRef} className="w-full h-3 overflow-hidden pointer-events-none" />
@@ -170,8 +170,8 @@ export default function Hero3DSlideBar({
                   onClick={() => onSelectIndex(idx)}
                   className={`group flex items-center gap-2.5 py-1 transition-all cursor-pointer text-left ${
                     isActive
-                      ? 'text-white font-semibold'
-                      : 'text-zinc-400 hover:text-zinc-200 font-normal'
+                      ? 'text-[#78f59c] font-semibold'
+                      : 'text-zinc-400 hover:text-white font-normal'
                   }`}
                 >
                   <span className="font-mono text-[11px] tracking-wider opacity-60">
@@ -185,15 +185,7 @@ export default function Hero3DSlideBar({
 
                   {/* Active Neon Accent Line */}
                   {isActive && (
-                    <span
-                      className={`hidden sm:inline-block w-4 h-[2px] transition-all rounded-full ${
-                        idx === 0
-                          ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]'
-                          : idx === 1
-                          ? 'bg-sky-400 shadow-[0_0_8px_#38bdf8]'
-                          : 'bg-rose-500 shadow-[0_0_8px_#f43f5e]'
-                      }`}
-                    />
+                    <span className="hidden sm:inline-block w-4 h-[2px] transition-all rounded-full bg-[#78f59c] shadow-[0_0_8px_#78f59c]" />
                   )}
                 </button>
               );

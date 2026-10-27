@@ -80,9 +80,9 @@ export default function HeroCarousel() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[95vh] min-h-[660px] max-h-[1050px] bg-[#07080b] text-white overflow-hidden flex flex-col justify-between"
+      className="relative w-full h-[95vh] min-h-[660px] max-h-[1050px] bg-[#081e18] text-white overflow-hidden flex flex-col justify-between"
     >
-      {/* 1. Three.js 3D Studio Stage (Dark Perspective Grid, Torus Halos, Ambient Particles) */}
+      {/* 1. Three.js 3D Studio Stage (Deep Emerald Ambience, Electric Rings, Bokeh Particles) */}
       <Hero3DCanvas currentIndex={currentIndex} />
 
       {/* 2. Background Images & 3D Car Renders Showcase */}
@@ -96,8 +96,8 @@ export default function HeroCarousel() {
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             >
-              {/* Automotive Studio Radial Spotlight (matching Image 2) */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(30,41,59,0.85)_0%,rgba(15,23,42,0.4)_45%,rgba(7,8,11,1)_75%)]" />
+              {/* Automotive Studio Radial Spotlight (Deep Emerald & Mint Glow) */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(14,58,47,0.85)_0%,rgba(9,34,28,0.55)_45%,rgba(8,30,24,1)_85%)]" />
 
               {/* Center-Right Car Presentation - Prominent, Sharp & Centered on the Vehicle */}
               <div
@@ -108,19 +108,19 @@ export default function HeroCarousel() {
               >
                 <div className="relative w-full max-w-[650px] md:max-w-[850px] lg:max-w-[1020px] xl:max-w-[1180px] flex items-center justify-center">
                   {/* Soft Ground Contact Shadow */}
-                  <div className="absolute -bottom-6 sm:-bottom-8 w-4/5 h-8 sm:h-12 bg-black/75 rounded-[100%] blur-2xl pointer-events-none" />
+                  <div className="absolute -bottom-6 sm:-bottom-8 w-4/5 h-8 sm:h-12 bg-black/80 rounded-[100%] blur-2xl pointer-events-none" />
 
                   {/* 3D Car Model Render */}
                   <img
                     src={car.heroImage}
                     alt={car.name}
-                    className="relative z-10 w-full object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.65)] will-change-transform"
+                    className="relative z-10 w-full object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.7)] will-change-transform"
                   />
                 </div>
               </div>
 
               {/* Left Soft Vignette for Editorial Readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#07080b] via-[#07080b]/75 to-transparent max-w-2xl pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#081e18] via-[#081e18]/80 to-transparent max-w-2xl pointer-events-none" />
             </div>
           );
         })}
@@ -129,12 +129,12 @@ export default function HeroCarousel() {
       {/* Top Spacer for Fixed Header */}
       <div className="h-24 sm:h-28" />
 
-      {/* 3. Concise Car-Focused Editorial Information (Zero Clutter, Focuses Purely on the Car) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+      {/* 3. Concise Car-Focused Editorial Information (Škoda Green & White Palette) */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
         <div ref={textRef} className="max-w-xl space-y-4 sm:space-y-5">
-          {/* Subtle Car Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-[11px] font-mono tracking-[0.2em] uppercase text-zinc-300 rounded-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          {/* Subtle Car Badge - Electric Green & Mint */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#78f59c]/10 border border-[#78f59c]/30 text-[11px] font-mono tracking-[0.2em] uppercase text-[#78f59c] rounded-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#78f59c] animate-pulse shadow-[0_0_8px_#78f59c]" />
             <span>Quang Anh SKODA &bull; {currentVehicle.shortName}</span>
           </div>
 
@@ -143,7 +143,7 @@ export default function HeroCarousel() {
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white leading-none">
               {currentVehicle.shortName}
             </h1>
-            <p className="text-base sm:text-xl text-zinc-400 font-light tracking-tight">
+            <p className="text-base sm:text-xl text-emerald-100/80 font-light tracking-tight">
               {currentVehicle.category === 'SUV'
                 ? 'SUV 7 Chỗ Đẳng Cấp Châu Âu'
                 : currentVehicle.category === 'Sedan'
@@ -155,28 +155,28 @@ export default function HeroCarousel() {
           {/* Clean Price & Power Micro Row */}
           <div className="flex items-center gap-6 sm:gap-8 pt-1">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block mb-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-200/60 block mb-0.5">
                 GIÁ NIÊM YẾT TỪ
               </span>
               <span className="text-base sm:text-xl font-mono font-bold text-white tracking-tight">
                 {currentVehicle.priceFormatted}
               </span>
             </div>
-            <div className="h-7 w-px bg-white/15" />
+            <div className="h-7 w-px bg-[#78f59c]/20" />
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block mb-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-200/60 block mb-0.5">
                 CÔNG SUẤT
               </span>
-              <span className="text-sm sm:text-base font-mono font-semibold text-zinc-200 tracking-tight">
+              <span className="text-sm sm:text-base font-mono font-semibold text-zinc-100 tracking-tight">
                 {currentVehicle.specs.power.split('@')[0].trim()}
               </span>
             </div>
-            <div className="h-7 w-px bg-white/15" />
+            <div className="h-7 w-px bg-[#78f59c]/20" />
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block mb-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-200/60 block mb-0.5">
                 TĂNG TỐC 0-100
               </span>
-              <span className="text-sm sm:text-base font-mono font-semibold text-emerald-400 tracking-tight">
+              <span className="text-sm sm:text-base font-mono font-bold text-[#78f59c] tracking-tight">
                 {currentVehicle.specs.acceleration.replace('giây', 's').replace('(0 - 100 km/h)', '').trim()}
               </span>
             </div>
@@ -186,7 +186,7 @@ export default function HeroCarousel() {
           <div className="flex flex-wrap items-center gap-3.5 pt-2">
             <Link
               href={`/models/${currentVehicle.slug}`}
-              className="px-7 py-3 rounded-sm inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 shadow-lg transition-all duration-200 cursor-pointer"
+              className="px-7 py-3 rounded-sm inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-[#78f59c] text-[#081e18] hover:bg-white hover:text-[#0e3a2f] shadow-[0_0_25px_rgba(120,245,156,0.35)] transition-all duration-200 cursor-pointer"
             >
               <span>Khám Phá Mẫu Xe</span>
               <ArrowRight className="w-4 h-4" />
@@ -194,7 +194,7 @@ export default function HeroCarousel() {
 
             <Link
               href="/test-drive"
-              className="px-7 py-3 rounded-sm text-xs font-semibold uppercase tracking-wider text-zinc-300 hover:text-white border border-white/20 hover:border-white/50 hover:bg-white/5 transition-all duration-200 cursor-pointer"
+              className="px-7 py-3 rounded-sm text-xs font-semibold uppercase tracking-wider text-white hover:text-[#78f59c] border border-white/30 hover:border-[#78f59c] hover:bg-[#78f59c]/10 transition-all duration-200 cursor-pointer"
             >
               <span>Đăng Ký Lái Thử</span>
             </Link>
@@ -202,9 +202,9 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* 4. Visual Automotive Slide Bar (Focuses on the Cars with Mini Renders & Progress Bars, No Text Clutter) */}
+      {/* 4. Visual Automotive Slide Bar (Škoda Green & White Progress Lines) */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-5 sm:pb-8">
-        <div className="border-t border-white/10 pt-3 sm:pt-4 flex items-center justify-between gap-6">
+        <div className="border-t border-[#78f59c]/20 pt-3 sm:pt-4 flex items-center justify-between gap-6">
           {/* 3 Interactive Visual Car Thumbnails */}
           <div className="flex items-center gap-4 sm:gap-8 flex-1 max-w-2xl">
             {heroVehicles.map((car, idx) => {
@@ -225,7 +225,7 @@ export default function HeroCarousel() {
                       alt={car.shortName}
                       className={`h-full w-auto object-contain transition-transform duration-500 will-change-transform ${
                         isActive
-                          ? 'scale-105 -translate-y-0.5 drop-shadow-[0_4px_12px_rgba(255,255,255,0.18)]'
+                          ? 'scale-105 -translate-y-0.5 drop-shadow-[0_4px_12px_rgba(120,245,156,0.3)]'
                           : 'grayscale group-hover:grayscale-0 group-hover:scale-100'
                       }`}
                     />
@@ -235,22 +235,22 @@ export default function HeroCarousel() {
                   <div className="flex items-baseline justify-between mt-1">
                     <span
                       className={`text-[11px] sm:text-xs tracking-wider uppercase font-medium transition-colors ${
-                        isActive ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-200'
+                        isActive ? 'text-[#78f59c] font-bold' : 'text-zinc-300 group-hover:text-white'
                       }`}
                     >
                       {car.shortName}
                     </span>
-                    <span className="hidden sm:inline text-[10px] font-mono text-zinc-500">
+                    <span className="hidden sm:inline text-[10px] font-mono text-emerald-200/50">
                       0{idx + 1}
                     </span>
                   </div>
 
-                  {/* Automotive Timer Progress Bar */}
+                  {/* Automotive Timer Progress Bar - Electric Green */}
                   <div className="relative w-full h-[2px] bg-white/10 rounded-full mt-1.5 overflow-hidden">
                     {isActive ? (
                       <div
                         key={`progress-${currentIndex}-${isPlaying}`}
-                        className={`h-full bg-white rounded-full ${
+                        className={`h-full bg-[#78f59c] shadow-[0_0_8px_#78f59c] rounded-full ${
                           isPlaying ? 'animate-carousel-progress' : 'w-full'
                         }`}
                         style={{
@@ -258,7 +258,7 @@ export default function HeroCarousel() {
                         }}
                       />
                     ) : (
-                      <div className="h-full w-0 group-hover:w-full bg-white/30 transition-all duration-300" />
+                      <div className="h-full w-0 group-hover:w-full bg-[#78f59c]/50 transition-all duration-300" />
                     )}
                   </div>
                 </button>
@@ -267,26 +267,26 @@ export default function HeroCarousel() {
           </div>
 
           {/* Minimal Controls */}
-          <div className="flex items-center gap-1.5 sm:gap-2 text-zinc-400 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-zinc-300 shrink-0">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
-              className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="p-2 rounded-full hover:bg-white/10 text-zinc-300 hover:text-[#78f59c] transition-colors cursor-pointer"
               title={isPlaying ? 'Tạm dừng trượt' : 'Tự động trượt'}
               aria-label={isPlaying ? 'Tạm dừng' : 'Tiếp tục'}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
             </button>
-            <span className="text-zinc-700 hidden sm:inline">|</span>
+            <span className="text-[#78f59c]/30 hidden sm:inline">|</span>
             <button
               onClick={handlePrev}
-              className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="p-2 rounded-full hover:bg-white/10 text-zinc-300 hover:text-[#78f59c] transition-colors cursor-pointer"
               aria-label="Mẫu xe trước"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={handleNext}
-              className="p-2 rounded-full hover:bg-white/10 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="p-2 rounded-full hover:bg-white/10 text-zinc-300 hover:text-[#78f59c] transition-colors cursor-pointer"
               aria-label="Mẫu xe kế tiếp"
             >
               <ChevronRight className="w-4 h-4" />
