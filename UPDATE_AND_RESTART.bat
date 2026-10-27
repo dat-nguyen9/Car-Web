@@ -1,6 +1,8 @@
 @echo off
 chcp 65001 >nul
-title QUANG ANH SKODA - CAP NHAT & KHOI DONG LAI
+title QUANG ANH SKODA - CAP NHAT VA KHOI DONG LAI
+
+set "PATH=%ProgramFiles%\nodejs;%APPDATA%\npm;%PATH%"
 
 echo =====================================================================
 echo       QUANG ANH SKODA - CAP NHAT PHIEN BAN MOI (GIT PULL)
@@ -26,7 +28,7 @@ if %errorLevel% neq 0 (
 
 echo.
 echo [3/3] Dang khoi dong lai website tren PM2...
-call pm2 restart carweb
+call pm2 restart carweb || call pm2 start ecosystem.config.js
 call pm2 status
 
 echo.
