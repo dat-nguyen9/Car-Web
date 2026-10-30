@@ -181,7 +181,35 @@ body {
   }
 }
 .animate-carousel-progress {
-  animation: carousel-progress 6.5s linear forwards;
+  animation: carousel-progress 5s linear forwards;
+}
+
+/* Subtle 3D Car Floating Animation */
+@keyframes car-float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+.animate-car-float {
+  animation: car-float-subtle 4.5s ease-in-out infinite;
+}
+
+/* Automotive Headline FadeIn */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fadeIn {
+  animation: hero-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Hide unwanted rectangular dev indicators or overlays */

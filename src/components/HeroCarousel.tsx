@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Pause, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Pause, Play, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 import { VEHICLES_DATA } from '@/data/models';
-import { gsap, useGSAP } from '@/lib/gsap';
 import Hero3DCanvas from './Hero3DCanvas';
 
 export default function HeroCarousel() {
@@ -12,22 +11,20 @@ export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
 
-  const containerRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const desktopCarImagesRef = useRef<(HTMLDivElement | null)[]>([]);
-  const mobileCarImagesRef = useRef<(HTMLDivElement | null)[]>([]);
+  // Interactive 3D Mouse Parallax Coordinates (-1 to +1)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Auto carousel slide timer
+  const currentVehicle = heroVehicles[currentIndex] || heroVehicles[0];
+
+  // Auto carousel slide timer (5 seconds cadence)
   useEffect(() => {
     if (!isPlaying) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroVehicles.length);
-    }, 6500);
+    }, 5000);
 
     return () => clearInterval(interval);
-  }, [isPlaying, heroVehicles.length]);
-
-  const currentVehicle = heroVehicles[currentIndex] || heroVehicles[0];
+  }, [isPlaying, currentIndex, heroVehicles.length]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? heroVehicles.length - 1 : prev - 1));
@@ -37,108 +34,83 @@ export default function HeroCarousel() {
     setCurrentIndex((prev) => (prev + 1) % heroVehicles.length);
   };
 
-  // GSAP animation on mount & on slide change
-  useGSAP(
-    () => {
-      // Animate text info with clean staggered reveal
-      if (textRef.current) {
-        const textElements = textRef.current.children;
-        gsap.fromTo(
-          textElements,
-          { opacity: 0, y: 15 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.06,
-            ease: 'power3.out',
-            overwrite: 'auto',
-          }
-        );
-      }
+  // Mouse Move tracking for 3D Perspective Tilt
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    setMousePos({ x, y });
+  };
 
-      // Animate active desktop car render with smooth automotive glide
-      const activeDesktopCar = desktopCarImagesRef.current[currentIndex];
-      if (activeDesktopCar) {
-        gsap.fromTo(
-          activeDesktopCar,
-          { opacity: 0, x: 40, scale: 0.97 },
-          {
-            opacity: 1,
-            x: 0,
-            scale: 1,
-            duration: 0.85,
-            ease: 'power3.out',
-            overwrite: 'auto',
-            force3D: true,
-          }
-        );
-      }
-
-      // Animate active mobile car render with smooth scale & fade
-      const activeMobileCar = mobileCarImagesRef.current[currentIndex];
-      if (activeMobileCar) {
-        gsap.fromTo(
-          activeMobileCar,
-          { opacity: 0, scale: 0.94 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.75,
-            ease: 'power3.out',
-            overwrite: 'auto',
-            force3D: true,
-          }
-        );
-      }
-    },
-    { dependencies: [currentIndex], scope: containerRef }
-  );
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
 
   return (
     <section
-      ref={containerRef}
-      className="relative w-full min-h-[640px] sm:min-h-[720px] lg:h-[95vh] lg:min-h-[660px] lg:max-h-[1050px] bg-[#081e18] text-white overflow-hidden flex flex-col justify-between"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full min-h-[640px] sm:min-h-[720px] lg:h-[95vh] lg:min-h-[660px] lg:max-h-[1050px] bg-[#081e18] text-white overflow-hidden flex flex-col justify-between select-none"
     >
-      {/* 1. Three.js 3D Studio Stage (Deep Emerald Ambience, Electric Rings, Bokeh Particles) */}
+      {/* 1. Interactive 3D Three.js Showroom Stage (3D Turntable Ground Radar Grid, Halo Light Rings, Bokeh Particles) */}
       <Hero3DCanvas currentIndex={currentIndex} />
 
-      {/* 2. Desktop-Only Background Car Presentation (Right Half of Screen) */}
+      {/* 2. Soft Ambient Lighting Overlay (Preserves Three.js 3D Visibility) */}
+      <div className="absolute inset-0 pointer-events-none z-2 bg-[radial-gradient(circle_at_75%_45%,rgba(120,245,156,0.12)_0%,rgba(14,58,47,0.3)_40%,transparent_75%)]" />
+      <div className="absolute inset-0 pointer-events-none z-2 bg-gradient-to-r from-[#081e18] via-[#081e18]/85 to-transparent max-w-3xl hidden lg:block" />
+
+      {/* 3. Desktop 3D Interactive Vehicle Presentation */}
       <div className="absolute inset-0 z-10 pointer-events-none hidden lg:block">
         {heroVehicles.map((car, idx) => {
           const isActive = idx === currentIndex;
           return (
             <div
               key={car.id}
-              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              className={`absolute inset-0 transition-all duration-700 ease-out flex items-center justify-end pr-8 xl:pr-20 pt-8 ${
+                isActive
+                  ? 'opacity-100 translate-x-0 scale-100 z-10'
+                  : 'opacity-0 translate-x-12 scale-95 z-0 pointer-events-none'
               }`}
             >
-              {/* Automotive Studio Radial Spotlight */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_50%,rgba(14,58,47,0.85)_0%,rgba(9,34,28,0.55)_45%,rgba(8,30,24,1)_85%)]" />
-
-              {/* Right Car Presentation */}
+              {/* 3D Tilted Car Container with Dynamic Lighting & Perspective */}
               <div
-                ref={(el) => {
-                  desktopCarImagesRef.current[idx] = el;
+                className="relative w-full max-w-[750px] lg:max-w-[920px] xl:max-w-[1100px] flex items-center justify-center will-change-transform"
+                style={{
+                  perspective: '1200px',
                 }}
-                className="absolute inset-0 flex items-center justify-end pr-8 xl:pr-20 pt-8"
               >
-                <div className="relative w-full max-w-[750px] lg:max-w-[920px] xl:max-w-[1100px] flex items-center justify-center">
-                  {/* Soft Ground Contact Shadow */}
-                  <div className="absolute -bottom-6 sm:-bottom-8 w-4/5 h-8 sm:h-12 bg-black/80 rounded-[100%] blur-2xl pointer-events-none" />
+                <div
+                  className="relative w-full flex items-center justify-center transition-transform duration-200 ease-out animate-car-float"
+                  style={{
+                    transform: `rotateY(${mousePos.x * 12}deg) rotateX(${-mousePos.y * 8}deg) translateZ(${Math.abs(mousePos.x) * 20}px)`,
+                    transformStyle: 'preserve-3d',
+                  }}
+                >
+                  {/* Dynamic Ground Contact Shadow (Reacts in reverse to 3D tilt) */}
+                  <div
+                    className="absolute -bottom-6 sm:-bottom-8 w-4/5 h-8 sm:h-12 bg-black/90 rounded-[100%] blur-2xl pointer-events-none transition-transform duration-200"
+                    style={{
+                      transform: `translateX(${-mousePos.x * 15}px) scale(${1 - Math.abs(mousePos.y) * 0.08})`,
+                    }}
+                  />
 
                   {/* 3D Car Model Render */}
                   <img
                     src={car.heroImage}
                     alt={car.name}
-                    className="relative z-10 w-full object-contain drop-shadow-[0_25px_45px_rgba(0,0,0,0.7)] will-change-transform"
+                    className="relative z-10 w-full object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.85)] will-change-transform"
+                    draggable={false}
+                  />
+
+                  {/* Dynamic Specular Light Reflection Sweep */}
+                  <div
+                    className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay opacity-35 transition-opacity duration-300"
+                    style={{
+                      background: `radial-gradient(circle at ${50 + mousePos.x * 35}% ${45 + mousePos.y * 35}%, rgba(255,255,255,0.8) 0%, rgba(120,245,156,0.3) 30%, transparent 65%)`,
+                    }}
                   />
                 </div>
               </div>
-
-              {/* Left Soft Vignette for Readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#081e18] via-[#081e18]/80 to-transparent max-w-2xl pointer-events-none" />
             </div>
           );
         })}
@@ -147,24 +119,27 @@ export default function HeroCarousel() {
       {/* Top Spacer for Fixed Header */}
       <div className="h-20 sm:h-24 lg:h-28 shrink-0" />
 
-      {/* 3. Main Content Container (Mobile-First: Separates Car & Text into Dedicated Vertical Zones) */}
+      {/* 4. Main Content (Zone A: Title, Zone B: Mobile Car, Zone C: Specs & CTAs) */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between py-2 sm:py-4">
-        <div ref={textRef} className="max-w-xl w-full flex flex-col justify-between h-full space-y-3 sm:space-y-4">
+        <div className="max-w-xl w-full flex flex-col justify-between h-full space-y-3 sm:space-y-4">
           
-          {/* Zone A (Top): Badge & Title */}
+          {/* Zone A: Badge & Headline */}
           <div className="space-y-2">
-            {/* Subtle Car Badge - Electric Green & Mint */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#78f59c]/10 border border-[#78f59c]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.2em] uppercase text-[#78f59c] rounded-sm">
+            {/* 3D Automotive Status Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#78f59c]/10 border border-[#78f59c]/30 text-[10px] sm:text-[11px] font-mono tracking-[0.2em] uppercase text-[#78f59c] rounded-sm backdrop-blur-md">
               <span className="w-1.5 h-1.5 rounded-full bg-[#78f59c] animate-pulse shadow-[0_0_8px_#78f59c]" />
               <span>Quang Anh SKODA &bull; {currentVehicle.shortName}</span>
+              <span className="hidden sm:inline-flex items-center gap-1 text-[9px] text-[#78f59c]/80 pl-1 border-l border-[#78f59c]/30">
+                <Sparkles className="w-2.5 h-2.5" /> 3D SHOWROOM
+              </span>
             </div>
 
-            {/* Prominent Vehicle Headline */}
-            <div className="space-y-1">
+            {/* Vehicle Headline with Smooth Crossfade Key */}
+            <div key={`title-${currentIndex}`} className="space-y-1 animate-fadeIn">
               <h1 className="text-3xl sm:text-5xl lg:text-7xl font-light tracking-tight text-white leading-tight">
                 {currentVehicle.shortName}
               </h1>
-              <p className="text-xs sm:text-lg text-emerald-100/80 font-light tracking-tight">
+              <p className="text-xs sm:text-lg text-emerald-100/85 font-light tracking-tight">
                 {currentVehicle.category === 'SUV'
                   ? 'SUV 7 Chỗ Đẳng Cấp Châu Âu'
                   : currentVehicle.category === 'Sedan'
@@ -174,30 +149,28 @@ export default function HeroCarousel() {
             </div>
           </div>
 
-          {/* Zone B (Mobile ONLY): Dedicated Unobstructed Car Display Area */}
-          {/* On mobile, the car has its own clean vertical zone. No text or buttons ever cover the car! */}
-          <div className="relative w-full h-[180px] sm:h-[250px] my-1 flex items-center justify-center lg:hidden">
+          {/* Zone B (Mobile ONLY): Dedicated Clean Car Display Area */}
+          <div className="relative w-full h-[190px] sm:h-[260px] my-1 flex items-center justify-center lg:hidden">
             {heroVehicles.map((car, idx) => {
               const isActive = idx === currentIndex;
               return (
                 <div
                   key={car.id}
-                  ref={(el) => {
-                    mobileCarImagesRef.current[idx] = el;
-                  }}
-                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
-                    isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-600 ease-out ${
+                    isActive
+                      ? 'opacity-100 scale-100 z-10'
+                      : 'opacity-0 scale-95 z-0 pointer-events-none'
                   }`}
                 >
-                  <div className="relative w-full h-full flex items-center justify-center px-2">
+                  <div className="relative w-full h-full flex items-center justify-center px-2 animate-car-float">
                     {/* Soft Ground Contact Shadow */}
-                    <div className="absolute -bottom-2 w-4/5 h-6 bg-black/80 rounded-[100%] blur-xl pointer-events-none" />
+                    <div className="absolute -bottom-2 w-4/5 h-6 bg-black/90 rounded-[100%] blur-xl pointer-events-none" />
 
-                    {/* 3D Car Model Render - 100% Unobstructed */}
+                    {/* 3D Car Model Render */}
                     <img
                       src={car.heroImage}
                       alt={car.name}
-                      className="relative z-10 max-h-full w-auto max-w-full object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] will-change-transform"
+                      className="relative z-10 max-h-full w-auto max-w-full object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)]"
                     />
                   </div>
                 </div>
@@ -205,8 +178,8 @@ export default function HeroCarousel() {
             })}
           </div>
 
-          {/* Zone C (Bottom): Specs Micro Row & CTA Buttons (Positioned neatly BELOW the car on mobile) */}
-          <div className="space-y-3.5 pt-1">
+          {/* Zone C: Specs Micro Row & CTA Buttons */}
+          <div key={`specs-${currentIndex}`} className="space-y-3.5 pt-1 animate-fadeIn">
             {/* Clean Price & Power Micro Row */}
             <div className="flex items-center gap-4 sm:gap-8 pt-1">
               <div>
@@ -258,7 +231,7 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* 4. Visual Automotive Slide Bar (Škoda Green & White Progress Lines) */}
+      {/* 5. Visual Automotive Slide Bar (Škoda Green & White Progress Lines) */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8 shrink-0">
         <div className="border-t border-[#78f59c]/20 pt-3 sm:pt-4 flex items-center justify-between gap-4 sm:gap-6">
           {/* 3 Interactive Visual Car Thumbnails */}
@@ -281,7 +254,7 @@ export default function HeroCarousel() {
                       alt={car.shortName}
                       className={`h-full w-auto object-contain transition-transform duration-500 will-change-transform ${
                         isActive
-                          ? 'scale-105 -translate-y-0.5 drop-shadow-[0_4px_12px_rgba(120,245,156,0.3)]'
+                          ? 'scale-105 -translate-y-0.5 drop-shadow-[0_4px_12px_rgba(120,245,156,0.35)]'
                           : 'grayscale group-hover:grayscale-0 group-hover:scale-100'
                       }`}
                     />
@@ -302,11 +275,11 @@ export default function HeroCarousel() {
                   </div>
 
                   {/* Automotive Timer Progress Bar - Electric Green */}
-                  <div className="relative w-full h-[2px] bg-white/10 rounded-full mt-1.5 overflow-hidden">
+                  <div className="relative w-full h-[2.5px] bg-white/10 rounded-full mt-1.5 overflow-hidden">
                     {isActive ? (
                       <div
-                        key={`progress-${currentIndex}-${isPlaying}`}
-                        className={`h-full bg-[#78f59c] shadow-[0_0_8px_#78f59c] rounded-full ${
+                        key={`prog-${currentIndex}-${isPlaying}`}
+                        className={`h-full bg-[#78f59c] shadow-[0_0_10px_#78f59c] rounded-full ${
                           isPlaying ? 'animate-carousel-progress' : 'w-full'
                         }`}
                         style={{
